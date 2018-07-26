@@ -1,0 +1,7 @@
+- name: configure target device
+  block:
+    - name: invoke configure terminal
+      include_tasks: configure.yaml
+      vars:
+        load_config_configuration_task: includes/{{ ansible_network_os}}/config_terminal.yaml
+  when: load_config_config_text is defined

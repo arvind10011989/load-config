@@ -1,0 +1,9 @@
+---
+- name: configure target device
+  block:
+    - name: load and execute configuration tasks
+      include_tasks: "{{ load_config_configuration_task }}"
+  rescue:
+    - name: display message
+      debug:
+        msg: "error configuring device"

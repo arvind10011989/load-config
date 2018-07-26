@@ -1,0 +1,16 @@
+---
+# delegate task to localhost to avoid starting the device connection
+- name: validate connection is network_cli
+  fail:
+    msg: "expected connection network_cli, got {{ ansible_connection }}"
+  when: ansible_connection != 'network_cli'
+
+- name: include device role specific tasks
+  include_tasks: "{{ item }}"
+  with_first_found:
+    - files:
+        - "load_config.yaml"
+      paths:
+        - "{{ playbook_dir }}/providers/{{ ansible_network_os }}"
+        - "/etc/ansible/load-config/providers/{{ ansible_network_os }}"
+        - "{{ role_path }}/providers/{{ ansible_network_os }}"

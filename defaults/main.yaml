@@ -1,0 +1,9 @@
+---
+# defaults file for net_config
+#
+load_config_config_file: "{{ config_file | default(None) }}"
+load_config_config_text: "{{ config_text | default(None) }}"
+load_config_commit: "{{ commit | default(True) }}"
+load_config_commit_comment: "{{ commit_comment }}"
+load_config_replace: "{{ replace | default(None) }}"
+load_config_discard: "{{ discard | default(False) }}"

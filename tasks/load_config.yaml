@@ -1,0 +1,17 @@
+---
+# load_config
+
+- name: validate required variable is set
+  fail:
+    msg: "missing required fact: config_file"
+  when: load_config_config_file is not defined
+
+- name: load config file
+  set_fact:
+    load_config_config_text: "{{ lookup('file', load_config_config_file) }}"
+  when: load_config_config_file is defined
+
+- name: include provider specific tasks
+  include_tasks: main.yaml
+  #vars:
+  #  config_resource: 'load_config'
